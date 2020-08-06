@@ -1,6 +1,33 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="/static/style.css">
 <title>Sointutunnistusappi</title>
-<h1>Sointutunnistusappi</h1>
-<p>Valitse alta haluamasi testi</p>
-<button>testi 1</button>
-<button>testi 2</button>
+<div>
+    <h1>Sointutunnistusappi</h1>
+    
+</div>
+<div>
+    {% if session.username %}
+    <p>Olet kirjautunut nimellä {{ session.username }}</p>
+    <p>Tervetuloa opettelemaan erilaisia sointuja</p>
+    <p>Valitse alta haluamasi toiminto</p>
+    <a href="/testi1" class="button6">tee testi 1</a><br>
+    <a href="/testi2" class="button6">tee testi 2</a><br>
+    <a href="/tulokset" class="button6">tarkastele tuloksiasi</a><br><br><br>
+    
+    <p><a href="/logout" class="button6" style="background-color:#668fff">Kirjaudu ulos</a></p>
+    
+    
+    {% else %}
+    
+    <div class="login">
+    <form action="/login" method="POST">
+    <p>Tunnus:<br>
+    <input type="text" name="username"></p>
+    <p>Salasana:<br>
+    <input type="password" name="password"></p>
+    <input type="submit" value="Kirjaudu">
+    </form>
+    <p>Ei tunnusta? <a href="/register" class="button6">rekisteröidy</a></p>
+</div>
+    {% endif %}
+</div>
