@@ -1,1 +1,3 @@
-# tietokantasovellus
+# sointutunnistusappi
+
+Tässä sovelluksessa harjoitellaan tunnistamaan erilaisia sointuja. Tavoitteena on tehdä kahdentyypisiä harjoituksia. Toisessa sointuja tunnistetaan lyhyen audioklipin perusteella, toisessa soinnut tunnistetaan annettujen äänien perusteella. Sovelluksessa on käyttäjiä ja opettajia. Käyttäjät voivat luoda omat tunnukset ja voivat harjoitella sointuja sekä tarkastella omia tuloksia. Opettajat voivat tarkastella kaikkien oppilaiden tuloksia ja lähettää mahdollisesti oppilaille viestejä.
