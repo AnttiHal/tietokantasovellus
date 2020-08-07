@@ -7,13 +7,13 @@ CREATE TABLE users (
 
 CREATE TABLE answers (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER,
+    user_id INTEGER REFERENCES users,
     answer INTEGER
 );
 
 CREATE TABLE choices (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER,
+    user_id INTEGER REFERENCES users,
     choice TEXT
 );
 

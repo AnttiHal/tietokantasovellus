@@ -5,7 +5,18 @@
     (duuri, molli, vähennetty, ylinouseva).</p>
 
 <p><audio id="major-1" src="/static/kolmisoinnut-major-1.mp3"></audio>
-<button class="chord-button" onclick="document.getElementById('major-1').play()">Kuuntele sointu</button></p><br>
+<button class="chord-button" onclick="document.getElementById('major-1').play()">Kuuntele sointu</button></p>
+
+<form action="/result" method="POST">
+Valitse oikea vaihtoehto:
+<p>
+    <input type="radio" name="sointu" value="1"> Duuri
+    <input type="radio" name="sointu" value="2"> Molli
+    <input type="radio" name="sointu" value="3"> Vähennetty
+    <input type="radio" name="sointu" value="4"> Ylinouseva
+    <p>
+<input type="submit" value="Lähetä">
+</form>
 
 <a href="/" class="button6">palaa etusivulle</a><br>
     
