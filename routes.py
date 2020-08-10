@@ -33,6 +33,12 @@ def register():
         
         if users.register(username,password):
             return redirect("/")
+        elif password == "":
+            return render_template("error.html",message="Salasana-kenttä ei voi olla tyhjä")
+        elif username == "":
+            return render_template("error.html",message="Tunnus-kenttä ei voi olla tyhjä")
+        
+
         else:
             return render_template("error.html",message="Rekisteröinti ei onnistunut")
 
