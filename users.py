@@ -8,6 +8,7 @@ def login(username,password):
     user = result.fetchone()
     if user == None:
         return False
+    
     else:
         if check_password_hash(user[0],password):
             session["user_id"] = user[1]
