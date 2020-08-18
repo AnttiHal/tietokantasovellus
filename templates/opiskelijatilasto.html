@@ -1,0 +1,9 @@
+nimi: {{user}}
+
+Vastaukset:
+{%for answer in answers%}
+<p>Tehtävä: {{answer[0]}}, Vastauksesi: {{answer[1]}}, Oikea vastaus: {{answer[2]}}</p>
+{%endfor%}
+
+
+<a href="/tilastot">Takaisin listaukseen</a>
