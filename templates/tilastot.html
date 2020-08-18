@@ -1,17 +1,16 @@
 <link rel="stylesheet" href="/static/style.css">
 <h1>Tilastot</h1>
-<p>Ylläpitäjät</p><br>
+<p>Ylläpitäjät</p>
 {% for admin in admins %}
 <li> Nimi: {{ admin[1] }}, ID:{{ admin[0] }}
 {% endfor %}
-<p>Rekisteröityneet käyttäjät</p><br>
+<p>Rekisteröityneet käyttäjät</p>
 {% for user in users %}
-<li> Nimi: {{ user[1] }}, ID:{{ user[0] }}
+<li> Nimi: <a href="/tilastot/{{ user[1] }}">{{ user[1] }}</a>, ID:{{ user[0] }}
 {% endfor %}
 </ul>
-
-
 <br>
+<p>Käyttäjien vastaukset</p>
 <br>
 <br>
 <a href="/" class="button6">palaa etusivulle</a><br>
