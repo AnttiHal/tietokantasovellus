@@ -186,6 +186,19 @@ def tilastot():
     users = result.fetchall()
     return render_template("tilastot.html", users=users, admins=admins)
 
+@app.route("/tilastot/<string:username>")
+def opiskelija_tilastot(username):
+    
+    sql = "SELECT id, username FROM users WHERE username=:username"
+    result = db.session.execute(sql, {"username":username})
+    user = result.fetchone()[1]
+
+    sql = "SELECT t.topic, a.answer, r.answer FROM users u, tests t, answers a, right_answers r WHERE username=:username AND t.id=a.test_id AND a.user_id=u.id AND r.test_id=t.id"
+    result = db.session.execute(sql, {"username":username})
+    answers = result.fetchall()
+    
+    return render_template("opiskelijatilasto.html", user=user, answers=answers)
+
 @app.route("/tulokset")
 def tulokset():
     user_id = users.user_id()
