@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+<head>  
+<script type="text/javascript" src="/static/button.js"></script>  
+<link rel="stylesheet" href="/static/style.css">
+</head>  
+
+<strong>{{ topic }}</strong><br><br>
+<audio id="chord" src="{{ audio_url }}"></audio>
+    
+<button class="button6" onclick="play()">Kuuntele sointu</button></p>
+
+<hr>
+Valitse oikea vaihtoehto:<br>
+<form action="/answer" method="POST">
+
+<input type="radio" name="answer" value="duuri"> duuri <br>
+<input type="radio" name="answer" value="molli"> molli <br>
+<input type="radio" name="answer" value="vähennetty"> vähennetty <br>
+<input type="radio" name="answer" value="ylinouseva"> ylinouseva <br>
+
+<p>
+<input type="submit" value="Lähetä">
+<input type="hidden" name="id" value="{{ id }}">
+</form>
+<hr>
+<a href="/">Takaisin</a>
+
+{% endblock %}

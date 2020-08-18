@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Luo uusi harjoitus</h2>
+<p>Tässä pääset luomaan sointutyypin tunnistustehtävän. Anna ensin tehtävälle nimi (esim. tunnista sointu 1).
+    Syötä sitten opiskelijalle esitettävän soinnun äänet, valitse sen jälkeen vastausvaihtoehdot listasta ja sen jälkeen oikea vastausvaihtoehto.</p>
+<form action="/create-basic" method="POST">
+    <p>Valitse tehtävän nimi:<br>
+        <input type="radio" name="topic" value="Tunnista sointu"> Tunnista sointu
+        <input type="radio" name="topic" value="Tunnista kolmisointu"> Tunnista kolmisointu
+        <input type="radio" name="topic" value="Tunnista nelisointu "> Tunnista nelisointu
+         
+    <p>Valitse soinnun äänet:<br>
+        <input type="checkbox" name="note" value=C> C 
+        <input type="checkbox" name="note" value=Eb> Eb 
+        <input type="checkbox" name="note" value=E> E 
+        <input type="checkbox" name="note" value=G> G 
+        <input type="checkbox" name="note" value=A> A 
+        <input type="checkbox" name="note" value=Bb> Bb 
+        <input type="checkbox" name="note" value=B> B 
+        
+
+    </p>
+    Valitse opiskelijalle näytettävät vastausvaihtoehdot:
+
+    <p>
+        <input type="checkbox" onClick="toggle(this)" /> Valitse kaikki<br/><br>
+        <input type="checkbox" name="choice" value="C"> C (soinnussa äänet C,E,G)<br>
+        <input type="checkbox" name="choice" value="Cm"> Cm (soinnussa äänet C,Eb,G)<br>
+        <input type="checkbox" name="choice" value="Cmaj7"> Cmaj7 (soinnussa äänet C,E,G,B)<br>
+        <input type="checkbox" name="choice" value="C7"> C7 (soinnussa äänet C,E,G,Bb)<br>
+        <input type="checkbox" name="choice" value="C6"> C6 (soinnussa äänet C,E,G,A)<br>
+        <input type="checkbox" name="choice" value="Cm6"> Cm6 (soinnussa äänet C,Eb,G,A)<br>
+        <input type="checkbox" name="choice" value="Cmmaj7"> Cmmaj7 (soinnussa äänet C,Eb,G,B)<br>
+        <input type="checkbox" name="choice" value="Cm7"> Cm7 (soinnussa äänet C,Eb,G,Bb)<br><br>
+        <script>
+            function toggle(source) {
+            checkboxes = document.getElementsByName('choice');
+            for(var i=0, n=checkboxes.length;i<n;i++) {
+              checkboxes[i].checked = source.checked;
+            }
+          }
+        </script>
+        
+        
+        
+    </p>
+<p>
+    
+    <p>Oikea vastaus:<br>
+        <input type="radio" name="answer" value="C"> C<br>
+        <input type="radio" name="answer" value="Cm"> Cm<br>
+        <input type="radio" name="answer" value="Cmaj7"> Cmaj7<br>
+        <input type="radio" name="answer" value="Cmaj7"> Cmaj7<br>
+        <input type="radio" name="answer" value="C7"> C7<br>
+        <input type="radio" name="answer" value="C6"> C6<br>
+        <input type="radio" name="answer" value="Cm6"> Cm6<br>
+        <input type="radio" name="answer" value="Cmmaj7"> Cmmaj7<br>
+        <input type="radio" name="answer" value="Cm7"> Cm7<br>
+    </p>
+    <input type="submit" value="Luo testi">
+    </form>
+    {% endblock %}

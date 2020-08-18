@@ -1,7 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
 <link rel="stylesheet" href="/static/style.css">
+
 <h1>Tulokset</h1>
 <p>Alla näet tuloksesi</p><br>
 
-<a href="/" class="button6">palaa etusivulle</a><br><br><br>
-    
-<p><a href="/logout" class="button6" style="background-color:#668fff">Kirjaudu ulos</a></p>
+Vastauksia yhteensä {{ answers_count }} kpl.
+<p>Kuuntelutehtävät:</p>
+<ol>
+{% for result in results %}
+<li> Kysymys: {{ result[0] }}, Vastauksesi: {{ result[1] }}, Oikea vastaus: {{ result[2]}}
+{% endfor %}
+</ol>
+<br>
+<p>Tunnistustehtävät:</p>
+<ol>
+{% for basicresult in basicresults %}
+<li> Kysymys: {{ basicresult[0] }}, Vastauksesi: {{ basicresult[1] }}, Oikea vastaus: {{ basicresult[2]}}
+{% endfor %}
+</ol>
+<br>
+<br>
+
+
+{%endblock%}

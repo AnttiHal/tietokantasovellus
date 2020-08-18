@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="/static/style.css">
+{% extends "layout.html" %}
+
+ 
+
+
+{% block content %}
+TESTIN TULOS<br>
+aihe: {{ topic }}
+<hr>
+Vastauksesi: {{answer}}<br>
+Oikea vastaus: {{right_answer}}<br>
+Vastauksesi on: 
+{%if correct==True %}
+    <p id="oikein">Oikein!</p>
+{%else%}
+    <p id="vaarin">Väärin!</p>
+{%endif%}
+
+<hr>
+{%if page==2 %}
+<p><a href="/kuuntelu" class="button6">Takaisin listaukseen</a></p>
+{%else%}
+<p><a href="/tunnistus" class="button6">Takaisin listaukseen</a></p>
+{%endif%}
+
+{%endblock%}

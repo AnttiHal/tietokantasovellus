@@ -9,21 +9,22 @@ CREATE TABLE answers (
     id SERIAL PRIMARY KEY,
     answer TEXT,
     user_id INTEGER REFERENCES users,
-    test_id INTEGER REFERENCES choices,
+    test_id INTEGER REFERENCES tests
     
 );
 
-CREATE TABLE questions (
+CREATE TABLE notes (
     id SERIAL PRIMARY KEY,
-    question TEXT,
-    user_id INTEGER REFERENCES tests
+    note TEXT,   
+    test_id INTEGER REFERENCES tests
     
 );
+
 
 CREATE TABLE choices (
     id SERIAL PRIMARY KEY,
     choice TEXT,
-    user_id INTEGER REFERENCES tests
+    test_id INTEGER REFERENCES tests
     
 );
 
@@ -31,5 +32,11 @@ CREATE TABLE tests (
     id SERIAL PRIMARY KEY,
     topic TEXT,
     created_at TIMESTAMP
+);
+
+CREATE TABLE audios (
+    id SERIAL PRIMARY KEY,
+    audio_url TEXT,
+    test_id INTEGER REFERENCES tests
 );
 

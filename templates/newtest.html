@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Luo uusi testi</h1>
+<p>Tässä pääset luomaan sointukuuntelutehtävän. 
+    Valitse ensin opiskelijalle esitettävä kysymys ja valitse sitten kuunneltava tiedosto ja sen jälkeen oikea vastausvaihtoehto.</p>
+<form action="/create" method="POST">
+    <p>Valitse tehtävän nimi:<br>
+        <input type="radio" name="topic" value="Tunnista sointu"> Tunnista sointu:<br>
+        <input type="radio" name="topic" value="Mikä sointu kyseessä"> Mikä sointu kyseessä?<br>
+        <input type="radio" name="topic" value="Minkä soinnun kuulet? "> Minkä soinnun kuulet?<br><br>
+
+    Valitse äänitiedosto:
+
+    <p>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-major-1.mp3"> duuri-1<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-major-2.mp3"> duuri-2<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-major-3.mp3"> duuri-3<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-major-4.mp3"> duuri-4<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-minor-1.mp3"> molli-1<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-minor-2.mp3"> molli-2<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-minor-3.mp3"> molli-3<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-diminished-1.mp3"> vähennetty-1<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-diminished-2.mp3"> vähennetty-2<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-diminished-3.mp3"> vähennetty-3<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-augmented-1.mp3"> ylinouseva-1<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-augmented-2.mp3"> ylinouseva-2<br>
+        <input type="radio" name="audio_url" value="/static/kolmisoinnut-augmented-3.mp3"> ylinouseva-3<br>
+    </p>
+<p>
+    
+    <p>Oikea vastaus:<br>
+    <input type="radio" name="answer" value="duuri"> duuri  <br>
+    <input type="radio" name="answer" value="molli"> molli <br>  
+    <input type="radio" name="answer" value="vähennetty"> vähennetty <br>
+    <input type="radio" name="answer" value="ylinouseva"> ylinouseva<br>
+    </p>
+    <input type="submit" value="Luo testi">
+    </form>
+    {% endblock %}

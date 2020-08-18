@@ -1,3 +1,8 @@
+body {
+    background-color: gainsboro;
+  }
+
+
 chord-button{
     display:inline-block;
     padding:0.7em 1.4em;
@@ -37,4 +42,37 @@ a.button6{
     }
     a.button6:active{
     top:0.1em;
+    }
+
+a.mission-button{
+    display:inline-block;
+    padding:0.7em 1.4em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.15em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    text-transform:uppercase;
+    font-weight:400;
+    font-size: 10px;
+    color:#FFFFFF;
+    background-color:#3369ff;
+    box-shadow:inset 0 -0.6em 0 -0.35em rgba(0,0,0,0.17);
+    text-align:center;
+    position:relative;
+    }
+    a.button6:active{
+    top:0.1em;
+    }
+
+    #oikein {
+        color: forestgreen;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    #vaarin {
+        color: crimson;
+        font-size: 20px;
+        font-weight: 700;
     }

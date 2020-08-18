@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="/static/style.css">
+<h1>Tilastot</h1>
+<p>Ylläpitäjät</p><br>
+{% for admin in admins %}
+<li> Nimi: {{ admin[1] }}, ID:{{ admin[0] }}
+{% endfor %}
+<p>Rekisteröityneet käyttäjät</p><br>
+{% for user in users %}
+<li> Nimi: {{ user[1] }}, ID:{{ user[0] }}
+{% endfor %}
+</ul>
+
+
+<br>
+<br>
+<br>
+<a href="/" class="button6">palaa etusivulle</a><br>
+    
+<p><a href="/logout" class="button6" style="background-color:#668fff">Kirjaudu ulos</a></p>

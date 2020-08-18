@@ -6,15 +6,26 @@
     
 </div>
 <div>
-    {% if session.user_id %}
-    <p>Olet kirjautunut nimellä <strong>{{ session.username }}</strong></p>
-    <p>Tervetuloa opettelemaan erilaisia sointuja</p>
-    <p>Valitse alta haluamasi toiminto</p>
-    <a href="/testi1" class="button6">tee testi 1</a><br>
-    <a href="/testi2" class="button6">tee testi 2</a><br>
-    <a href="/tulokset" class="button6">tarkastele tuloksiasi</a><br><br><br>
     
-    <p><a href="/logout" class="button6" style="background-color:#668fff">Kirjaudu ulos</a></p>
+    {% if session.user_id %}
+        
+
+        
+        
+        {% if session.admin == True %}
+            <p>Olet kirjautunut pääkäyttäjänä nimellä <strong>{{ session.username }}</strong></p>
+            <a href="/newtest" class="button6">Lisää uusi kuunteluharjoitus</a><br>
+            <a href="/newtest-basic" class="button6">Lisää uusi perusharjoitus</a><br>
+            <a href="/tilastot" class="button6">Tarkastele oppilaiden tuloksia</a><br><br><br>
+        {% else %}
+            <p>Olet kirjautunut nimellä <strong>{{ session.username }}</strong></p>
+            <p>Tervetuloa opettelemaan erilaisia sointuja</p>
+            <p>Valitse alta haluamasi toiminto</p>
+            <a href="/kuuntelu" class="button6">tee kuunteluharjoituksia</a><br>
+            <a href="/tunnistus" class="button6">tee soinnuntunnistusharjoituksia</a><br>
+            <a href="/tulokset" class="button6">tarkastele tuloksiasi</a><br><br><br>
+        {% endif %}
+        <p><a href="/logout" class="button6" style="background-color:#668fff">Kirjaudu ulos</a></p>
     
     
     {% else %}
