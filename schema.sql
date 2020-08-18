@@ -13,6 +13,13 @@ CREATE TABLE answers (
     
 );
 
+CREATE TABLE right_answers (
+    id SERIAL PRIMARY KEY,
+    answer TEXT,
+    test_id INTEGER REFERENCES tests
+    
+);
+
 CREATE TABLE notes (
     id SERIAL PRIMARY KEY,
     note TEXT,   
