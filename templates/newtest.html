@@ -1,6 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
+{% if session.admin == True %}
 <h1>Luo uusi testi</h1>
+
 <p>Tässä pääset luomaan sointukuuntelutehtävän. 
     Valitse ensin opiskelijalle esitettävä kysymys ja valitse sitten kuunneltava tiedosto ja sen jälkeen oikea vastausvaihtoehto.</p>
 <form action="/create" method="POST">
@@ -36,4 +38,7 @@
     </p>
     <input type="submit" value="Luo testi">
     </form>
+    {%else%}
+    <p>Sinulla ei ole oikeuksia tähän sivuun</p>
+    {%endif%}
     {% endblock %}
