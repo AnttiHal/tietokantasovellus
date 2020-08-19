@@ -1,9 +1,15 @@
-nimi: {{user}}
-
-Vastaukset:
+{% extends "layout.html" %}
+{% block content %}
+<p>nimi: {{user}}</p>
+<p>Vastauksia yhteensä: {{count_answer}} kpl</p>
+<p>Oikeita vastauksia yhteensä: {{right_answers_count}} kpl</p>
+<p>Vastaukset:</p>
 {%for answer in answers%}
-<p>Tehtävä: {{answer[0]}}, Vastauksesi: {{answer[1]}}, Oikea vastaus: {{answer[2]}}</p>
+<ul>
+<li><p>Tehtävä: {{answer[0]}}, käyttäjän vastaus: {{answer[1]}}, oikea vastaus: {{answer[2]}}</p></li>
+</ul>
 {%endfor%}
 
 
 <a href="/tilastot">Takaisin listaukseen</a>
+{%endblock%}
