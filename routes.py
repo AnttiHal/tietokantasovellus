@@ -220,11 +220,15 @@ def opiskelija_tilastot(username):
     result = db.session.execute(sql, {"username":username})
     answers = result.fetchall()
 
+    sql = "SELECT count(*) FROM answers a, right_answers r, users u WHERE r.test_id=a.test_id AND  u.username=:username AND a.answer=r.answer AND a.user_id=u.id"
+    result = db.session.execute(sql, {"username":username})
+    right_answers_count = result.fetchone()[0]
+
     sql = "SELECT count(*) FROM answers a , users u WHERE username=:username AND a.user_id=u.id"
     result = db.session.execute(sql, {"username":username})
     count_answer = result.fetchone()[0]
     
-    return render_template("opiskelijatilasto.html", user=user, answers=answers, count_answer=count_answer)
+    return render_template("opiskelijatilasto.html", user=user, answers=answers, count_answer=count_answer, right_answers_count=right_answers_count)
 
 @app.route("/tulokset")
 def tulokset():
