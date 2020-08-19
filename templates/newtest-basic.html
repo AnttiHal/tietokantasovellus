@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+{% if session.admin == True %}
 <h2>Luo uusi harjoitus</h2>
 <p>Tässä pääset luomaan sointutyypin tunnistustehtävän. Anna ensin tehtävälle nimi (esim. tunnista sointu 1).
     Syötä sitten opiskelijalle esitettävän soinnun äänet, valitse sen jälkeen vastausvaihtoehdot listasta ja sen jälkeen oikea vastausvaihtoehto.</p>
@@ -59,4 +60,7 @@
     </p>
     <input type="submit" value="Luo testi">
     </form>
+    {%else%}
+    <p>Sinulla ei ole oikeuksia tähän sivuun.</p>
+    {%endif%}
     {% endblock %}
