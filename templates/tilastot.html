@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block content %}
+{% if session.admin == True %}
 <link rel="stylesheet" href="/static/style.css">
 <h1>Tilastot</h1>
 <p>Ylläpitäjät</p>
@@ -10,9 +13,14 @@
 {% endfor %}
 </ul>
 <br>
-<p>Käyttäjien vastaukset</p>
+<p>Käyttäjien vastauksia yhteensä: {{count_answer}} kpl</p>
+<p>Tehtäviä yhteensä: {{count_tests}} kpl</p>
+<p>Kuuntelutehtäviä yhteensä: {{count_audiotests}} kpl</p>
+<p>Tunnistustehtäviä yhteensä: {{count_basictests}} kpl</p>
+<p>Tehtäviä yhteensä: {{count_tests}} kpl</p>
 <br>
 <br>
-<a href="/" class="button6">palaa etusivulle</a><br>
-    
-<p><a href="/logout" class="button6" style="background-color:#668fff">Kirjaudu ulos</a></p>
+{%else%}
+<p>Sinulla ei ole oikeuksia tähän sivuun.</p>
+{%endif%}
+{%endblock%}
