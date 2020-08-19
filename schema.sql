@@ -1,3 +1,9 @@
+CREATE TABLE tests (
+    id SERIAL PRIMARY KEY,
+    topic TEXT,
+    created_at TIMESTAMP
+);
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username TEXT UNIQUE,
@@ -35,11 +41,6 @@ CREATE TABLE choices (
     
 );
 
-CREATE TABLE tests (
-    id SERIAL PRIMARY KEY,
-    topic TEXT,
-    created_at TIMESTAMP
-);
 
 CREATE TABLE audios (
     id SERIAL PRIMARY KEY,
