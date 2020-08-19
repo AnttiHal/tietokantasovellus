@@ -1,7 +1,8 @@
 CREATE TABLE tests (
     id SERIAL PRIMARY KEY,
     topic TEXT,
-    created_at TIMESTAMP
+    created_at TIMESTAMP,
+    type INTEGER
 );
 
 CREATE TABLE users (
