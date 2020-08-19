@@ -37,7 +37,11 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
         role = request.form["role"]
-        
+        if len(username) > 20:
+            return render_template("error.html", message="Käyttäjätunnus on liian pitkä")
+        if len(password) > 20:
+            return render_template("error.html", message="Salasana on liian pitkä")
+
         if users.register(username,password,role):
             return redirect("/")
         elif password == "":
@@ -97,7 +101,7 @@ def create_basic():
     sql = "INSERT INTO right_answers (test_id, answer) VALUES (:test_id, :answer)"
     db.session.execute(sql, {"test_id":test_id, "answer":answer})
     db.session.commit()
-    return render_template("message.html", message="Uusi")
+    return render_template("message.html", message="Uusi tunnistustesti luotu")
 
 @app.route("/create", methods=["POST"])
 def create():
@@ -113,7 +117,7 @@ def create():
     sql = "INSERT INTO right_answers (test_id, answer) VALUES (:test_id, :answer)"
     db.session.execute(sql, {"test_id":test_id, "answer":answer})
     db.session.commit()
-    return redirect("/")
+    return render_template("message.html", message="Uusi kuuntelutesti luotu")
 
 
 @app.route("/audiotest/<int:id>")
@@ -181,10 +185,29 @@ def tilastot():
     sql = "SELECT id, username FROM users WHERE role=1"
     result = db.session.execute(sql)
     admins = result.fetchall()
+
     sql = "SELECT id, username FROM users WHERE role=0"
     result = db.session.execute(sql)
     users = result.fetchall()
-    return render_template("tilastot.html", users=users, admins=admins)
+
+    sql = "SELECT count(*) FROM answers"
+    result = db.session.execute(sql)
+    count_answer = result.fetchone()[0]
+
+    sql = "SELECT count(*) FROM tests"
+    result = db.session.execute(sql)
+    count_tests = result.fetchone()[0]
+
+    sql = "SELECT count(*) FROM tests WHERE type=1"
+    result = db.session.execute(sql)
+    count_audiotests = result.fetchone()[0]
+
+    sql = "SELECT count(*) FROM tests WHERE type=2"
+    result = db.session.execute(sql)
+    count_basictests = result.fetchone()[0]
+
+    return render_template("tilastot.html", users=users, admins=admins, count_answer=count_answer, count_tests=
+    count_tests, count_audiotests=count_audiotests, count_basictests=count_basictests)
 
 @app.route("/tilastot/<string:username>")
 def opiskelija_tilastot(username):
@@ -196,8 +219,12 @@ def opiskelija_tilastot(username):
     sql = "SELECT t.topic, a.answer, r.answer FROM users u, tests t, answers a, right_answers r WHERE username=:username AND t.id=a.test_id AND a.user_id=u.id AND r.test_id=t.id"
     result = db.session.execute(sql, {"username":username})
     answers = result.fetchall()
+
+    sql = "SELECT count(*) FROM answers a , users u WHERE username=:username AND a.user_id=u.id"
+    result = db.session.execute(sql, {"username":username})
+    count_answer = result.fetchone()[0]
     
-    return render_template("opiskelijatilasto.html", user=user, answers=answers)
+    return render_template("opiskelijatilasto.html", user=user, answers=answers, count_answer=count_answer)
 
 @app.route("/tulokset")
 def tulokset():
@@ -207,6 +234,10 @@ def tulokset():
     result = db.session.execute(sql, {"user_id":user_id})
     answers_count = result.fetchone()[0]
 
+    sql = "SELECT count(*) FROM answers a, right_answers r, tests t WHERE t.id=a.test_id AND t.id=r.test_id AND a.user_id=:user_id AND a.answer=r.answer"
+    result = db.session.execute(sql, {"user_id":user_id})
+    right_answers_count = result.fetchone()[0]
+
     sql = "SELECT t.topic, a.answer, r.answer FROM tests t, answers a, right_answers r WHERE t.id=a.test_id AND a.user_id=:user_id AND t.id=r.test_id AND t.type=2"
     result = db.session.execute(sql, {"user_id":user_id})
     results = result.fetchall()
@@ -214,7 +245,7 @@ def tulokset():
     sql = "SELECT t.topic, a.answer, r.answer FROM tests t, answers a, right_answers r WHERE t.id=a.test_id AND a.user_id=:user_id AND t.id=r.test_id AND t.type=1"
     result = db.session.execute(sql, {"user_id":user_id})
     basicresults = result.fetchall()
-    return render_template("tulokset.html", results=results, basicresults=basicresults, answers_count=answers_count)
+    return render_template("tulokset.html", results=results, basicresults=basicresults, answers_count=answers_count, right_answers_count=right_answers_count)
 
 
 
