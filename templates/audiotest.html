@@ -12,7 +12,7 @@
 
 <hr>
 Valitse oikea vaihtoehto:<br>
-<form action="/answer" method="POST">
+<form action="/answer" method="POST" >
 
 <input type="radio" name="answer" value="duuri"> duuri <br>
 <input type="radio" name="answer" value="molli"> molli <br>
@@ -24,6 +24,6 @@ Valitse oikea vaihtoehto:<br>
 <input type="hidden" name="id" value="{{ id }}">
 </form>
 <hr>
-<a href="/">Takaisin</a>
+<a href="/kuuntelu">Takaisin listaukseen</a>
 
 {% endblock %}
