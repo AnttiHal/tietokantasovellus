@@ -7,7 +7,7 @@
 {% endfor %}
 </p>
 <hr>
-<form action="/answer" method="POST">
+<form action="/answer" method="POST" >
 <p>Valitse oikea sointu:</p>
 {% for choice in choices %}
 <input type="radio" name="answer" value="{{ choice[1] }}"> {{ choice[1] }} <br>
