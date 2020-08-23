@@ -4,5 +4,5 @@ Tässä sovelluksessa harjoitellaan tunnistamaan erilaisia sointuja. Sovellukses
 
 # Tämänhetkinen tilanne
 
-Sovelluksessa on toteutettuna kaikki sille suunnitellut toiminnallisuudet. Herokuun on luotu valmiiksi pääkäyttäjän tunnukset, käyttäjätunnus admin, salasana admin. Sovelluksen testaamisen vuoksi käyttäjän rekisteröityessä voi valita roolin (opettaja tai opiskelija). Ulkoasun suunnittelu ja refaktorointi ovat vielä kesken. linkki herokuun: https://sointutunnistusappi.herokuapp.com/
+Sovelluksessa on toteutettuna valtaosa sille suunnitelluista toiminnallisuuksista. Tarkoituksena on lisätä vielä käyttäjän ja harjoituksen poistamistoiminto ylläpitäjän toimintoihin sekä mahdollisesti vielä pari muuta yhteenvetokyselyä. Herokuun on luotu valmiiksi pääkäyttäjän tunnukset, käyttäjätunnus admin, salasana admin. Sovelluksen testaamisen vuoksi käyttäjän rekisteröityessä voi valita roolin (opettaja tai opiskelija). Ulkoasun suunnittelu ja refaktorointi ovat vielä kesken. Linkki herokuun: https://sointutunnistusappi.herokuapp.com/
 
