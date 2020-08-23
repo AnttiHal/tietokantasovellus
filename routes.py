@@ -37,6 +37,7 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
         role = request.form["role"]
+        
         if len(username) > 20:
             return render_template("error.html", message="Käyttäjätunnus on liian pitkä")
         if len(password) > 20:
@@ -44,6 +45,8 @@ def register():
 
         if users.register(username,password,role):
             return redirect("/")
+        elif role == "":
+            return render_template("error.html", message="et valinnut käyttäjälle roolia")
         elif password == "":
             return render_template("error.html",message="Salasana-kenttä ei voi olla tyhjä")
         elif username == "":
@@ -198,11 +201,11 @@ def tilastot():
     result = db.session.execute(sql)
     count_tests = result.fetchone()[0]
 
-    sql = "SELECT count(*) FROM tests WHERE type=1"
+    sql = "SELECT count(*) FROM tests WHERE type=2"
     result = db.session.execute(sql)
     count_audiotests = result.fetchone()[0]
 
-    sql = "SELECT count(*) FROM tests WHERE type=2"
+    sql = "SELECT count(*) FROM tests WHERE type=1"
     result = db.session.execute(sql)
     count_basictests = result.fetchone()[0]
 
