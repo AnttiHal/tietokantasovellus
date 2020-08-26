@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="form-style-6">
+<h1>Opiskelijan tiedot</h1>
+<p>nimi: {{user}}</p>
+<p>Vastauksia yhteensä: {{count_answer}} kpl</p>
+<p>Oikeita vastauksia yhteensä: {{right_answers_count}} kpl</p>
+<p>Vastaukset:</p>
+{%for answer in answers%}
+<ul>
+<li><p><strong>Tehtävä: </strong>{{answer[0]}}<br> <strong>Käyttäjän vastaus:</strong> {{answer[1]}}<br>
+     <strong>Oikea vastaus: </strong>{{answer[2]}}</p></li>
+</ul>
+
+{%endfor%}
+</div>
+
+<a href="/tilastot" class="button6">Takaisin listaukseen</a>
+{%endblock%}
