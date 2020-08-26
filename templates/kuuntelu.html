@@ -1,14 +1,12 @@
 <link rel="stylesheet" href="/static/style.css">
 {% extends "layout.html" %}
 {% block content %}
-<hr>
+
 {% for test in tests %}
-{{ test[1] }} <br>
-Tehtävä lisätty: {{ test[2].strftime("%d.%m.%Y klo %H:%M") }} <br>
-
+<p><strong>{{ test[1] }}</strong></p>
+<p>Tehtävä lisätty: {{ test[2].strftime("%d.%m.%Y klo %H:%M") }}</p> 
 <a href="/audiotest/{{ test[0] }}" class="mission-button">Tee tehtävä</a> 
-
-<br>
-<br>
+<hr>
 {% endfor %}
+
 {% endblock %}

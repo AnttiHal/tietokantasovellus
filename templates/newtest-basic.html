@@ -2,16 +2,19 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if session.admin == True %}
-<h2>Luo uusi harjoitus</h2>
-<p>Tässä pääset luomaan sointutyypin tunnistustehtävän. Anna ensin tehtävälle nimi (esim. tunnista sointu 1).
+
+<form action="/create-basic" method="POST" class="form-style-6">
+    <h1>Luo uusi harjoitus</h1>
+    <p>Tässä pääset luomaan sointutyypin tunnistustehtävän. Anna ensin tehtävälle nimi (esim. tunnista sointu 1).
     Syötä sitten opiskelijalle esitettävän soinnun äänet, valitse sen jälkeen vastausvaihtoehdot listasta ja sen jälkeen oikea vastausvaihtoehto.</p>
-<form action="/create-basic" method="POST">
-    <p>Valitse tehtävän nimi:<br>
-        <input type="radio" name="topic" value="Tunnista sointu"> Tunnista sointu
-        <input type="radio" name="topic" value="Tunnista kolmisointu"> Tunnista kolmisointu
+    <h2>Valitse tehtävän nimi:</h2>
+        <p>
+        <input type="radio" name="topic" value="Tunnista sointu"> Tunnista sointu<br>
+        <input type="radio" name="topic" value="Tunnista kolmisointu"> Tunnista kolmisointu<br>
         <input type="radio" name="topic" value="Tunnista nelisointu "> Tunnista nelisointu
-         
-    <p>Valitse soinnun äänet:<br>
+    </p>     
+    <h2>Valitse soinnun äänet (vähintään 3 kpl):</h2>
+    <p>
         <input type="checkbox" name="note" value=C> C 
         <input type="checkbox" name="note" value=Eb> Eb 
         <input type="checkbox" name="note" value=E> E 
@@ -22,7 +25,7 @@
         
 
     </p>
-    Valitse opiskelijalle näytettävät vastausvaihtoehdot:
+    <h2>Valitse opiskelijalle näytettävät vastausvaihtoehdot:</h2>
 
     <p>
         <input type="checkbox" onClick="toggle(this)" /> Valitse kaikki<br/><br>
@@ -48,7 +51,8 @@
     </p>
 <p>
     
-    <p>Oikea vastaus:<br>
+    <h2>Oikea vastaus:</h2>
+        <p>
         <input type="radio" name="answer" value="C"> C<br>
         <input type="radio" name="answer" value="Cm"> Cm<br>
         <input type="radio" name="answer" value="Cmaj7"> Cmaj7<br>
@@ -60,6 +64,7 @@
         <input type="radio" name="answer" value="Cm7"> Cm7<br>
     </p>
     <input type="submit" value="Luo testi">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
     {%else%}
     <p>Sinulla ei ole oikeuksia tähän sivuun.</p>

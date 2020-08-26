@@ -1,27 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
 <link rel="stylesheet" href="/static/style.css">
-
+<div class="form-style-6">
 <h1>Tulokset</h1>
-<p>Alla näet tuloksesi</p><br>
-
+<p>Tällä sivulla voit tarkastella sovelluksessa tekemiäsi tehtäviä.</p><br>
 <p>Vastauksia yhteensä {{ answers_count }} kpl.</p>
 <p>Oikeita vastauksia yhteensä: {{right_answers_count}} kpl</p>
-<p>Kuuntelutehtävät:</p>
+<p><strong>Kuuntelutehtävät:</strong></p>
 <ol>
 {% for result in results %}
-<li> Kysymys: {{ result[0] }}, Vastauksesi: {{ result[1] }}, Oikea vastaus: {{ result[2]}}
+<li> <p><strong>Kysymys:</strong> {{ result[0] }} <br><strong>Vastauksesi: </strong>{{ result[1] }}<br>
+   <strong>Oikea vastaus: </strong>{{ result[2]}}</p>
 {% endfor %}
 </ol>
 <br>
-<p>Tunnistustehtävät:</p>
+<p><strong>Tunnistustehtävät:</strong></p>
 <ol>
 {% for basicresult in basicresults %}
-<li> Kysymys: {{ basicresult[0] }}, Vastauksesi: {{ basicresult[1] }}, Oikea vastaus: {{ basicresult[2]}}
+<li> <p><strong>Kysymys: </strong>{{ basicresult[0] }}<br> <strong>Vastauksesi:</strong> 
+    {{ basicresult[1] }}<br> <strong>Oikea vastaus:</strong> {{ basicresult[2]}}</p>
 {% endfor %}
 </ol>
 <br>
 <br>
 
-
+</div>
 {%endblock%}

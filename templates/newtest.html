@@ -1,17 +1,17 @@
 {% extends "layout.html" %}
 {% block content %}
 {% if session.admin == True %}
-<h1>Luo uusi testi</h1>
 
-<p>Tässä pääset luomaan sointukuuntelutehtävän. 
-    Valitse ensin opiskelijalle esitettävä kysymys ja valitse sitten kuunneltava tiedosto ja sen jälkeen oikea vastausvaihtoehto.</p>
-<form action="/create" method="POST">
-    <p>Valitse tehtävän nimi:<br>
+<form action="/create" method="POST" class="form-style-6">
+    <h1>Luo uusi testi</h1>
+    <p>Tässä pääset luomaan sointukuuntelutehtävän. Valitse ensin opiskelijalle esitettävä kysymys ja valitse sitten kuunneltava tiedosto ja sen jälkeen oikea vastausvaihtoehto.</p>
+    <h2>Valitse tehtävän nimi:</h2>
+        <p>
         <input type="radio" name="topic" value="Tunnista sointu"> Tunnista sointu:<br>
         <input type="radio" name="topic" value="Mikä sointu kyseessä"> Mikä sointu kyseessä?<br>
         <input type="radio" name="topic" value="Minkä soinnun kuulet? "> Minkä soinnun kuulet?<br><br>
 
-    Valitse äänitiedosto:
+    <h2>Valitse äänitiedosto:</h2>
 
     <p>
         <input type="radio" name="audio_url" value="/static/kolmisoinnut-major-1.mp3"> duuri-1<br>
@@ -30,13 +30,16 @@
     </p>
 <p>
     
-    <p>Oikea vastaus:<br>
+    <h2>Oikea vastaus:</h2>
+    
+    <p>
     <input type="radio" name="answer" value="duuri"> duuri  <br>
     <input type="radio" name="answer" value="molli"> molli <br>  
     <input type="radio" name="answer" value="vähennetty"> vähennetty <br>
     <input type="radio" name="answer" value="ylinouseva"> ylinouseva<br>
     </p>
     <input type="submit" value="Luo testi">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     </form>
     {%else%}
     <p>Sinulla ei ole oikeuksia tähän sivuun</p>

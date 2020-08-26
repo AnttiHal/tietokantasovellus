@@ -5,7 +5,8 @@
 
 
 {% block content %}
-TESTIN TULOS<br>
+<div class="form-style-6">
+<h1>Testin tulos</h1><br>
 aihe: {{ topic }}
 <hr>
 Vastauksesi: {{answer}}<br>
@@ -18,6 +19,7 @@ Vastauksesi on:
 {%endif%}
 
 <hr>
+</div>
 {%if page==2 %}
 <p><a href="/kuuntelu" class="button6">Takaisin listaukseen</a></p>
 {%else%}

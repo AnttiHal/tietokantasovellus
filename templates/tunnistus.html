@@ -1,9 +1,10 @@
 <link rel="stylesheet" href="/static/style.css">
 {% extends "layout.html" %}
 {% block content %}
+<p>Valitse alta haluamasi tehtävä.</p>
 <hr>
 {% for test in tests %}
-{{ test[1] }} <br>
+<strong>{{ test[1] }} </strong><br>
 Tehtävä lisätty: {{ test[2].strftime("%d.%m.%Y klo %H:%M") }} <br>
 
 <a href="/basictest/{{ test[0] }}" class="mission-button">Tee tehtävä</a> 

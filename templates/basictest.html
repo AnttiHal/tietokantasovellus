@@ -1,13 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
 <link rel="stylesheet" href="/static/style.css">
-<strong>{{ topic }}</strong><br><br>
+
+<form action="/answer" method="POST" class="form-style-6">
+<h1>{{ topic }}</h1>
 <p>
     Soinnun äänet:<br>
-{% for note in notes %}
-{{ note[1] }} 
-{% endfor %}
+    {% for note in notes %}
+    {{ note[1] }} 
+    {% endfor %}
 </p>
-<hr>
-<form action="/answer" method="POST" >
 <p>Valitse oikea sointu:</p>
 {% for choice in choices %}
 <input type="radio" name="answer" value="{{ choice[1] }}"> {{ choice[1] }} <br>
@@ -15,6 +17,7 @@
 <p>
 <input type="submit" value="Lähetä">
 <input type="hidden" name="id" value="{{ id }}">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
 </form>
 <hr>
-<a href="/">Takaisin</a>
+{%endblock%}

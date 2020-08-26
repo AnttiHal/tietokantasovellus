@@ -2,7 +2,10 @@
 <link rel="stylesheet" href="/static/style.css">
 <title>Sointutunnistusappi</title>
 <div>
-    <h1>Sointutunnistusappi</h1>
+    <h1>
+        <a href="/"><img src="/static/mikasointu-01.png" alt="Which Chord logo" /></a>
+    </h1>
+      
     
 </div>
 <div>
@@ -18,14 +21,17 @@
             <a href="/newtest-basic" class="button6">Lisää uusi perusharjoitus</a><br>
             <a href="/tilastot" class="button6">Tarkastele tilastoja</a><br><br><br>
         {% else %}
-            <p>Olet kirjautunut nimellä <strong>{{ session.username }}</strong></p>
-            <p>Tervetuloa opettelemaan erilaisia sointuja</p>
-            <p>Valitse alta haluamasi toiminto</p>
-            <a href="/kuuntelu" class="button6">tee kuunteluharjoituksia</a><br>
-            <a href="/tunnistus" class="button6">tee soinnuntunnistusharjoituksia</a><br>
-            <a href="/tulokset" class="button6">tarkastele tuloksiasi</a><br><br><br>
+            <p>Hei <strong>{{ session.username }}</strong>!</p>
+            <p>Tervetuloa opettelemaan erilaisia sointuja!</p>
+            <p><strong>Which Chord?</strong> -sovelluksen avulla voit opetella tunnistamaan sointuja joko annettujen äänten perusteella tai korvakuulolta.</p>
+            
+            <br><br><br>
+            <p><strong>Valitse alta haluamasi toiminto:</strong></p>
+            <a href="/kuuntelu" class="button6">Tee kuunteluharjoituksia</a><br>
+            <a href="/tunnistus" class="button6">Tee soinnuntunnistusharjoituksia</a><br>
+            <a href="/tulokset" class="button6">Tarkastele tuloksiasi</a><br><br><br>
         {% endif %}
-        <p><a href="/logout" class="button6" style="background-color:#668fff">Kirjaudu ulos</a></p>
+        <p><a href="/logout" class="button-logout" style="background-color:#414141">Kirjaudu ulos</a></p>
     
     
     {% else %}
