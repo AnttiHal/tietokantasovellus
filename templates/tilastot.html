@@ -2,22 +2,29 @@
 {% block content %}
 {% if session.admin == True %}
 <link rel="stylesheet" href="/static/style.css">
-<h1>Tilastot</h1>
-<p>Ylläpitäjät</p>
+<div class="form-style-6">
+    <h1>Tilastot</h1>
+<h2>Ylläpitäjät</h2>
 {% for admin in admins %}
-<li> Nimi: {{ admin[1] }}, ID:{{ admin[0] }}
+
+<li> Nimi: {{ admin[1] }}, ID:{{ admin[0] }}</li>
 {% endfor %}
-<p>Rekisteröityneet käyttäjät</p>
+
+<h2>Rekisteröityneet käyttäjät</h2>
+
 {% for user in users %}
-<li> Nimi: <a href="/tilastot/{{ user[1] }}">{{ user[1] }}</a>, ID:{{ user[0] }}
+<p><form action="/delete/{{ user[0] }}" method="POST"> Nimi: <a href="/tilastot/{{ user[1] }}" class="link-stat">{{ user[1] }}</a>, ID:{{ user[0] }}     
+        <input type="submit" value="Poista" id="poista">
+    </form></p>
+    <hr>
 {% endfor %}
-</ul>
+
 <br>
 <p>Käyttäjien vastauksia yhteensä: {{count_answer}} kpl</p>
 <p>Tehtäviä yhteensä: {{count_tests}} kpl</p>
 <p>Kuuntelutehtäviä yhteensä: {{count_audiotests}} kpl</p>
 <p>Tunnistustehtäviä yhteensä: {{count_basictests}} kpl</p>
-<p>Tehtäviä yhteensä: {{count_tests}} kpl</p>
+</div>
 <br>
 <br>
 {%else%}
