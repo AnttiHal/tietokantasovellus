@@ -59,19 +59,19 @@ def register():
             return render_template("error.html",message="Rekisteröinti ei onnistunut")
 
 @app.route("/kuuntelu")
-def kuuntelu():
+def eartestlist():
     sql = "SELECT id, topic, created_at FROM tests WHERE type=2"
     result = db.session.execute(sql)
     tests = result.fetchall()
-    return render_template("kuuntelu.html", tests=tests)
+    return render_template("eartestlist.html", tests=tests)
 
 @app.route("/tunnistus")
-def tunnistus():
+def recognition_list():
 
     sql = "SELECT id, topic, created_at FROM tests WHERE type=1"
     result = db.session.execute(sql)
     tests = result.fetchall()
-    return render_template("tunnistus.html", tests=tests)
+    return render_template("recognition_list.html", tests=tests)
 
 
 
@@ -190,7 +190,7 @@ def result(id):
 
 
 @app.route("/tilastot")
-def tilastot():
+def statistics():
     sql = "SELECT id, username FROM users WHERE role=1"
     result = db.session.execute(sql)
     admins = result.fetchall()
@@ -215,11 +215,11 @@ def tilastot():
     result = db.session.execute(sql)
     count_basictests = result.fetchone()[0]
 
-    return render_template("tilastot.html", users=users, admins=admins, count_answer=count_answer, count_tests=
+    return render_template("statistics.html", users=users, admins=admins, count_answer=count_answer, count_tests=
     count_tests, count_audiotests=count_audiotests, count_basictests=count_basictests)
 
 @app.route("/tilastot/<string:username>")
-def opiskelija_tilastot(username):
+def user_statistics(username):
     
     sql = "SELECT id, username FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
@@ -239,7 +239,7 @@ def opiskelija_tilastot(username):
     result = db.session.execute(sql, {"username":username})
     count_answer = result.fetchone()[0]
     
-    return render_template("opiskelijatilasto.html", user=user, answers=answers, count_answer=count_answer, right_answers_count=right_answers_count)
+    return render_template("user_statistics.html", user=user, answers=answers, count_answer=count_answer, right_answers_count=right_answers_count)
 
 @app.route("/tulokset")
 def results():
