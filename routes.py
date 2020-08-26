@@ -2,6 +2,8 @@ from app import app
 from flask import redirect, render_template, request, session
 import users
 from db import db 
+from posix import abort
+
 
 @app.route("/")
 def index():
@@ -85,12 +87,14 @@ def newtest_basic():
 
 @app.route("/create-basic", methods=["POST"])
 def create_basic():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     topic = request.form["topic"]
     sql = "INSERT INTO tests (topic, created_at, type) VALUES (:topic, NOW(), 1) RETURNING id"
     result = db.session.execute(sql, {"topic":topic})
     test_id = result.fetchone()[0]
     notes = request.form.getlist("note")
-    for note in notes:
+    for note in notes:        
         if note != "":
             sql = "INSERT INTO notes (test_id, note) VALUES (:test_id, :note)"
             db.session.execute(sql, {"test_id":test_id, "note":note})
@@ -108,6 +112,8 @@ def create_basic():
 
 @app.route("/create", methods=["POST"])
 def create():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     topic = request.form["topic"]
     sql = "INSERT INTO tests (topic, created_at, type) VALUES (:topic, NOW(), 2) RETURNING id"
     result = db.session.execute(sql, {"topic":topic})
@@ -149,6 +155,8 @@ def basictest(id):
 
 @app.route("/answer", methods=["POST"])
 def answer():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
     test_id = request.form["id"]
     user_id = users.user_id()
     if "answer" in request.form:
@@ -176,9 +184,7 @@ def result(id):
     sql = "SELECT answer FROM answers WHERE test_id=:test_id and user_id=:user_id order by id desc"
     result = db.session.execute(sql,{"test_id":id, "user_id":user_id})
     answer = result.fetchone()[0]
-    correct = False
-    if answer == right_answer:
-        correct = True
+    correct = answer == right_answer
     
     return render_template("result.html", topic=topic, right_answer=right_answer, answer=answer, correct=correct, page=page)
 
@@ -219,11 +225,13 @@ def opiskelija_tilastot(username):
     result = db.session.execute(sql, {"username":username})
     user = result.fetchone()[1]
 
-    sql = "SELECT t.topic, a.answer, r.answer FROM users u, tests t, answers a, right_answers r WHERE username=:username AND t.id=a.test_id AND a.user_id=u.id AND r.test_id=t.id"
+    sql = "SELECT t.topic, a.answer, r.answer FROM users u, tests t, answers a, "\
+        "right_answers r WHERE username=:username AND t.id=a.test_id AND a.user_id=u.id AND r.test_id=t.id"
     result = db.session.execute(sql, {"username":username})
     answers = result.fetchall()
 
-    sql = "SELECT count(*) FROM answers a, right_answers r, users u WHERE r.test_id=a.test_id AND  u.username=:username AND a.answer=r.answer AND a.user_id=u.id"
+    sql = "SELECT count(*) FROM answers a, right_answers r, users u WHERE r.test_id=a.test_id AND"\
+        " u.username=:username AND a.answer=r.answer AND a.user_id=u.id"
     result = db.session.execute(sql, {"username":username})
     right_answers_count = result.fetchone()[0]
 
@@ -234,27 +242,36 @@ def opiskelija_tilastot(username):
     return render_template("opiskelijatilasto.html", user=user, answers=answers, count_answer=count_answer, right_answers_count=right_answers_count)
 
 @app.route("/tulokset")
-def tulokset():
+def results():
     user_id = users.user_id()
 
     sql = "SELECT count(*) FROM answers WHERE  user_id=:user_id"
     result = db.session.execute(sql, {"user_id":user_id})
     answers_count = result.fetchone()[0]
 
-    sql = "SELECT count(*) FROM answers a, right_answers r, tests t WHERE t.id=a.test_id AND t.id=r.test_id AND a.user_id=:user_id AND a.answer=r.answer"
+    sql = "SELECT count(*) FROM answers a, right_answers r, tests t WHERE t.id=a.test_id AND "\
+        "t.id=r.test_id AND a.user_id=:user_id AND a.answer=r.answer"
     result = db.session.execute(sql, {"user_id":user_id})
     right_answers_count = result.fetchone()[0]
 
-    sql = "SELECT t.topic, a.answer, r.answer FROM tests t, answers a, right_answers r WHERE t.id=a.test_id AND a.user_id=:user_id AND t.id=r.test_id AND t.type=2"
+    sql = "SELECT t.topic, a.answer, r.answer FROM tests t, answers a, right_answers r WHERE "\
+        "t.id=a.test_id AND a.user_id=:user_id AND t.id=r.test_id AND t.type=2"
     result = db.session.execute(sql, {"user_id":user_id})
     results = result.fetchall()
 
-    sql = "SELECT t.topic, a.answer, r.answer FROM tests t, answers a, right_answers r WHERE t.id=a.test_id AND a.user_id=:user_id AND t.id=r.test_id AND t.type=1"
+    sql = "SELECT t.topic, a.answer, r.answer FROM tests t, answers a, right_answers r WHERE "\
+        "t.id=a.test_id AND a.user_id=:user_id AND t.id=r.test_id AND t.type=1"
     result = db.session.execute(sql, {"user_id":user_id})
     basicresults = result.fetchall()
-    return render_template("tulokset.html", results=results, basicresults=basicresults, answers_count=answers_count, right_answers_count=right_answers_count)
+    return render_template("results.html", results=results, basicresults=basicresults, answers_count=answers_count, right_answers_count=right_answers_count)
 
+@app.route("/delete/<int:id>", methods=["POST"])
+def delete(id):
+    sql = "DELETE FROM users WHERE id=:id"
+    db.session.execute(sql, {"id":id})
+    db.session.commit()
 
+    return render_template("message.html", message="Käyttäjä poistettu.")
 
 
     
