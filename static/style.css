@@ -13,6 +13,7 @@ h1 {
     margin-right: -10px;
     margin-bottom: 30px;
     margin-top: -10px;
+    
 }
 
 a.logo {
@@ -22,7 +23,7 @@ a.logo {
 }
 
 img {
-    max-width: 40%;
+    max-width: 200px;
 }
 
 
