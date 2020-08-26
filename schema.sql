@@ -15,7 +15,7 @@ CREATE TABLE users (
 CREATE TABLE answers (
     id SERIAL PRIMARY KEY,
     answer TEXT,
-    user_id INTEGER REFERENCES users,
+    user_id INTEGER REFERENCES users ON DELETE CASCADE,
     test_id INTEGER REFERENCES tests
     
 );
