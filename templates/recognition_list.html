@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="/static/style.css">
 {% extends "layout.html" %}
 {% block content %}
+{% if session.user_id %}
 <p>Valitse alta haluamasi tehtävä.</p>
 <hr>
 {% for test in tests %}
@@ -12,4 +13,7 @@ Tehtävä lisätty: {{ test[2].strftime("%d.%m.%Y klo %H:%M") }} <br>
 <br>
 <br>
 {% endfor %}
+{% else %}
+<p>Sinulla ei ole oikeuksia tähän sivuun.</p>
+{% endif %}
 {% endblock %}

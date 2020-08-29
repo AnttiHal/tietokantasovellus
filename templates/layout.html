@@ -10,5 +10,8 @@
 {% block content %}{% endblock %}
 <br>
 <p><a href="/" class="button6">Takaisin etusivulle</a></p>
+{% if session.user_id %}
 <p><a href="/logout" class="button-logout" >Kirjaudu ulos</a></p>
+{% endif %}
+
 </html>
